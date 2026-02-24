@@ -44,7 +44,12 @@ class SMSAttack:
         self.lock = Lock()
         self.lang = get_lang()
         self.proxies = get_proxies()
-        self.ua = UserAgent(verify_ssl=False)
+        class FixedUA:
+    @property
+    def random(self):
+        return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+self.ua = FixedUA()
 
     def stat(self):
         if platform == 'win32':
@@ -1846,3 +1851,4 @@ class SMSAttack:
         time.sleep(1)
 
         th.join()
+
